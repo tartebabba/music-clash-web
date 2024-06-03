@@ -2,6 +2,12 @@ import { GridItem } from './types';
 
 
 
+export const extractSongs = (items: GridItem[]): string[][] => {
+  // Shuffle songs in each group first
+  const groupedSongs = items.map((item) => item.songs);
+  return groupedSongs;
+};
+
 export const extractNShuffleSongs = (items: GridItem[]): string[] => {
   // Shuffle songs in each group first
   const groupedSongs = items.map((item) => shuffleSongs(item.songs));
@@ -38,9 +44,8 @@ export const shuffleRemainingSongs = (
 
 export const compareSubmittedWithGameSongs = (
   submittedArray: string[],
-  gameArray: string[]
+  gameArray: string[][]
 ) => {
-  console.log(gameArray);
   const isCorrect = gameArray.some((songArray) => {
     return songArray.every(
       (song: string, index: number) => song === submittedArray[index]
