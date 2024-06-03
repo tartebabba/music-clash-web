@@ -1,3 +1,5 @@
+import { Button } from './ui/button';
+
 export default function ConnectionsButtonBar(props) {
   const { checkGuessCorrect, selectedLength } = props;
 
@@ -6,14 +8,20 @@ export default function ConnectionsButtonBar(props) {
     console.log(selectedLength);
   }
   return (
-    <>
-      <button
+    <div>
+      <Button className="m-2" variant="outline">
+        Shuffle
+      </Button>
+      <Button className="m-2" variant="outline">
+        Deselect All
+      </Button>
+      <Button
         onClick={submitGuess}
         disabled={selectedLength !== 4}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        className="m-2"
       >
         Submit Guess
-      </button>
-    </>
+      </Button>
+    </div>
   );
 }
