@@ -42,11 +42,18 @@ export default function Connections() {
     );
 
     if (isGuessCorrect) {
-      setCurrentGameDetails((prev: currentGameDetails) => ({
-        ...prev,
-        correctGroups: [...prev.correctGroups, sortedSelected],
-        selected: [],
-      }));
+      setCurrentGameDetails((prev: currentGameDetails) => {
+        const updatedSongsForGrid = prev.songsForGrid.filter(
+          (song) => !sortedSelected.includes(song)
+        );
+
+        return {
+          ...prev,
+          correctGroups: [...prev.correctGroups, sortedSelected],
+          selected: [],
+          songsForGrid: updatedSongsForGrid,
+        };
+      });
     }
   }
 

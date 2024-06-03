@@ -2,7 +2,7 @@ import { currentGameDetails } from './types';
 import { Button } from './ui/button';
 import { shuffleSongs } from './utils';
 
-export default function ConnectionsButtonBar(props) {
+export default function ConnectionsButtonBar(props: any) {
   const { checkGuessCorrect, selectedLength, setCurrentGameDetails } = props;
 
   function submitGuess() {

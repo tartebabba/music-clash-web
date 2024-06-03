@@ -43,18 +43,33 @@ export default function ConnectionsGrid(props: ConnectionsGridProps) {
     return bgColour;
   }
 
+  const stylingForGrid = (song: string) => {
+    return `${isSelected(song) ? 'bg-gray-600 text-white' : 'bg-orange-100'} ${getBackgroundColor(
+      song
+    )} m-2 p-1 text-black flex items-center justify-center aspect-square font-bold text-md rounded-md`;
+  };
+
   return (
     <>
       <div className="flex justify-center items-center">
-        <div className="grid grid-cols-4 grid-rows-4 gap-2">
+        <div className="grid grid-cols-4 gap-2">
+          {currentGameDetails.correctGroups.flat().map((song) => {
+            return (
+              <div
+                key={song}
+                onClick={(data) => handleClick(data)}
+                className={stylingForGrid(song)}
+              >
+                <p>{song}</p>
+              </div>
+            );
+          })}
           {currentGameDetails.songsForGrid.map((song) => {
             return (
               <div
                 key={song}
                 onClick={(data) => handleClick(data)}
-                className={`${
-                  isSelected(song) ? 'bg-gray-600 text-white' : 'bg-orange-100'
-                } ${getBackgroundColor(song)} m-2 p-1 text-black flex items-center justify-center aspect-square font-bold text-md rounded-md`}
+                className={stylingForGrid(song)}
               >
                 <p>{song}</p>
               </div>
