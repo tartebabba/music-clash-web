@@ -41,15 +41,19 @@ export default function Connections() {
     setCurrentGameDetails,
   };
 
+  const buttonBarComponents = {
+    checkGuessCorrect,
+    selectedLength: currentGameDetails.selected.length,
+    setCurrentGameDetails,
+  };
+  
+
   return (
     <div>
       <h1>Connections</h1>
       <p>Connections page content</p>
       <ConnectionsGrid {...gridComponents} />
-      <ConnectionsButtonBar
-        checkGuessCorrect={checkGuessCorrect}
-        selectedLength={currentGameDetails.selected.length}
-      />
+      <ConnectionsButtonBar {...buttonBarComponents} />
     </div>
   );
 }
