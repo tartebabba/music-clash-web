@@ -1,16 +1,44 @@
+import ConnectionsButtonBar from './ConnectionsButtonBar';
 import ConnectionsGrid from './connections-grid';
 import { extractNShuffleSongs, shuffleSongs } from './utils';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { GameDetails } from './types';
 
 export default function Connections() {
-  const [detailsForGame, setDetailsForGame] = useState({});
+  const [detailsForGame, setDetailsForGame] = useState({
+    songsObject: gridItems, // To change to actual data
+  });
+  const [currentGameDetails, setCurrentGameDetails] = useState<GameDetails>({
+    songsForGrid: [],
+    selected: [],
+    triesRemaining: 4,
+  });
 
-  const songs = extractNShuffleSongs(gridItems);
-  // const onetoSixteen = Array.from({ length: 16 }, (_, i) => i + 1);
-  const shuffledSongs = shuffleSongs(songs);
+  const songs = extractNShuffleSongs(detailsForGame.songsObject);
+
+  useEffect(() => {
+    setCurrentGameDetails((prev: GameDetails) => ({
+      ...prev,
+      songsForGrid: shuffleSongs(songs),
+    }));
+  }, []);
+
+  function checkGuessCorrect() {
+    const sortedSelected = currentGameDetails.selected.sort();
+    const sortedGamedSongs = detailsForGame.songsObject.map((artistSongs) =>
+      artistSongs.songs.sort()
+    );
+
+    const isGuessCorrect = sortedGamedSongs.some((songArray) =>
+      songArray.every((song, index) => song === sortedSelected[index])
+    );
+    return isGuessCorrect;
+  }
 
   const gridComponents = {
-    shuffledSongs,
+    detailsForGame,
+    currentGameDetails,
+    setCurrentGameDetails,
   };
 
   return (
@@ -18,6 +46,10 @@ export default function Connections() {
       <h1>Connections</h1>
       <p>Connections page content</p>
       <ConnectionsGrid {...gridComponents} />
+      <ConnectionsButtonBar
+        checkGuessCorrect={checkGuessCorrect}
+        selectedLength={currentGameDetails.selected.length}
+      />
     </div>
   );
 }

@@ -22,7 +22,14 @@ export const shuffleSongs = (songs: string[]): string[] => {
   return shuffledSongs;
 };
 
+export const compareSubmittedWithGameSongs = (submittedArray, gameArray) => {
+  console.log(submittedArray, gameArray);
+  const isCorrect = gameArray.every((songArray, index) =>
+    console.log(songArray, index)
+  );
 
+  return isCorrect;
+};
 
 
 // export const extractArtists = (items: GridItem[]): string[] => {
