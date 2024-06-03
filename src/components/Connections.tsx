@@ -1,23 +1,30 @@
 import ConnectionsButtonBar from './ConnectionsButtonBar';
 import ConnectionsGrid from './connections-grid';
-import { extractNShuffleSongs, shuffleSongs } from './utils';
+import {
+  compareSubmittedWithGameSongs,
+  extractNShuffleSongs,
+  shuffleSongs,
+} from './utils';
 import { useEffect, useState } from 'react';
-import { GameDetails } from './types';
+import { currentGameDetails } from './types';
 
 export default function Connections() {
   const [detailsForGame, setDetailsForGame] = useState({
     songsObject: gridItems, // To change to actual data
   });
-  const [currentGameDetails, setCurrentGameDetails] = useState<GameDetails>({
-    songsForGrid: [],
-    selected: [],
-    triesRemaining: 4,
-  });
+  const [currentGameDetails, setCurrentGameDetails] =
+    useState<currentGameDetails>({
+      songsForGrid: [],
+      selected: [],
+      triesRemaining: 4,
+      correctGroups: [],
+      guessedGroups: [],
+    });
 
   const songs = extractNShuffleSongs(detailsForGame.songsObject);
 
   useEffect(() => {
-    setCurrentGameDetails((prev: GameDetails) => ({
+    setCurrentGameDetails((prev: currentGameDetails) => ({
       ...prev,
       songsForGrid: shuffleSongs(songs),
     }));
@@ -29,10 +36,18 @@ export default function Connections() {
       artistSongs.songs.sort()
     );
 
-    const isGuessCorrect = sortedGamedSongs.some((songArray) =>
-      songArray.every((song, index) => song === sortedSelected[index])
+    const isGuessCorrect = compareSubmittedWithGameSongs(
+      sortedSelected,
+      sortedGamedSongs
     );
-    return isGuessCorrect;
+
+    if (isGuessCorrect) {
+      setCurrentGameDetails((prev: currentGameDetails) => ({
+        ...prev,
+        correctGroups: [...prev.correctGroups, sortedSelected],
+        selected: [],
+      }));
+    }
   }
 
   const gridComponents = {
@@ -46,7 +61,6 @@ export default function Connections() {
     selectedLength: currentGameDetails.selected.length,
     setCurrentGameDetails,
   };
-  
 
   return (
     <div>

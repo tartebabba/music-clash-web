@@ -1,4 +1,4 @@
-import { GameDetails } from './types';
+import { currentGameDetails } from './types';
 import { Button } from './ui/button';
 import { shuffleSongs } from './utils';
 
@@ -7,18 +7,17 @@ export default function ConnectionsButtonBar(props) {
 
   function submitGuess() {
     checkGuessCorrect();
-    console.log(selectedLength);
   }
 
   function clearSelected() {
-    setCurrentGameDetails((prev: GameDetails) => ({
+    setCurrentGameDetails((prev: currentGameDetails) => ({
       ...prev,
       selected: [],
     }));
   }
 
   function shuffleCards() {
-    setCurrentGameDetails((prev: GameDetails) => ({
+    setCurrentGameDetails((prev: currentGameDetails) => ({
       ...prev,
       songsForGrid: shuffleSongs(prev.songsForGrid),
     }));

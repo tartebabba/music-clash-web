@@ -6,13 +6,15 @@ export type GridItem = {
 export type ConnectionsGridProps = {
   // shuffledSongs: string[];
   detailsForGame: any;
-  currentGameDetails: GameDetails;
+  currentGameDetails: currentGameDetails;
   setCurrentGameDetails: any;
 };
 
-export interface GameDetails {
+export interface currentGameDetails {
   songsForGrid: string[];
   selected: string[];
   triesRemaining: number;
+  correctGroups: string[][];
+  guessedGroups: string[][];
 }
 

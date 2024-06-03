@@ -1,4 +1,4 @@
-import { GameDetails, ConnectionsGridProps } from './types';
+import { currentGameDetails, ConnectionsGridProps } from './types';
 
 export default function ConnectionsGrid(props: ConnectionsGridProps) {
   const { currentGameDetails, setCurrentGameDetails } = props;
@@ -7,12 +7,12 @@ export default function ConnectionsGrid(props: ConnectionsGridProps) {
     const selectedSong = item.target.innerText;
 
     if (currentGameDetails.selected.includes(selectedSong)) {
-      setCurrentGameDetails((prev: GameDetails) => ({
+      setCurrentGameDetails((prev: currentGameDetails) => ({
         ...prev,
         selected: prev.selected.filter((song) => song !== selectedSong),
       }));
     } else if (currentGameDetails.selected.length < 4) {
-      setCurrentGameDetails((prev: GameDetails) => ({
+      setCurrentGameDetails((prev: currentGameDetails) => ({
         ...prev,
         selected: [...prev.selected, selectedSong],
       }));
@@ -23,29 +23,45 @@ export default function ConnectionsGrid(props: ConnectionsGridProps) {
     return currentGameDetails.selected.includes(song);
   }
 
+  function getBackgroundColor(song: string) {
+    const colours = [
+      'bg-purple-500',
+      'bg-red-500',
+      'bg-amber-500',
+      'bg-sky-500',
+    ];
+    let bgColour = '';
+
+    currentGameDetails.correctGroups.some((group, index) => {
+      if (group.includes(song)) {
+        bgColour = colours[index];
+        bgColour += ' text-white';
+        return true;
+      }
+      return false;
+    });
+    return bgColour;
+  }
+
   return (
     <>
-      <h1>Connections Grid</h1>
-      <div className="grid grid-cols-4 grid-rows-4 gap-2 ">
-        {currentGameDetails.songsForGrid.map((song) => {
-          return (
-            <div
-              key={song}
-              onClick={(data) => handleClick(data)}
-              className={`${
-                isSelected(song) ? 'bg-gray-600 text-white' : 'bg-orange-100'
-              } m-2 p-1 text-black flex items-center justify-center aspect-square font-bold text-md rounded-md`}
-            >
-              <p>{song}</p>
-            </div>
-          );
-        })}
+      <div className="flex justify-center items-center">
+        <div className="grid grid-cols-4 grid-rows-4 gap-2">
+          {currentGameDetails.songsForGrid.map((song) => {
+            return (
+              <div
+                key={song}
+                onClick={(data) => handleClick(data)}
+                className={`${
+                  isSelected(song) ? 'bg-gray-600 text-white' : 'bg-orange-100'
+                } ${getBackgroundColor(song)} m-2 p-1 text-black flex items-center justify-center aspect-square font-bold text-md rounded-md`}
+              >
+                <p>{song}</p>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </>
   );
 }
-
-// [x] Center Text in Grid
-// [] Add a shuffle button
-// [] Add a reset button
-// [] Colour toggles for clicks on circles
