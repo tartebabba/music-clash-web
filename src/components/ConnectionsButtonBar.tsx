@@ -1,5 +1,6 @@
 import { GameDetails } from './types';
 import { Button } from './ui/button';
+import { shuffleSongs } from './utils';
 
 export default function ConnectionsButtonBar(props) {
   const { checkGuessCorrect, selectedLength, setCurrentGameDetails } = props;
@@ -15,9 +16,17 @@ export default function ConnectionsButtonBar(props) {
       selected: [],
     }));
   }
+
+  function shuffleCards() {
+    setCurrentGameDetails((prev: GameDetails) => ({
+      ...prev,
+      songsForGrid: shuffleSongs(prev.songsForGrid),
+    }));
+  }
+
   return (
     <div>
-      <Button className="m-2" variant="outline">
+      <Button className="m-2" variant="outline" onClick={shuffleCards}>
         Shuffle
       </Button>
       <Button className="m-2" variant="outline" onClick={clearSelected}>
