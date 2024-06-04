@@ -7,6 +7,8 @@ import {
 } from './utils';
 import { useEffect, useState } from 'react';
 import { currentGameDetails } from './types';
+import NavigationBar from './NavigationBar';
+import GameTitleBar from './GameTitleBar';
 
 export default function Connections() {
   const [detailsForGame, setDetailsForGame] = useState({
@@ -71,8 +73,8 @@ export default function Connections() {
 
   return (
     <div>
-      <h1>Connections</h1>
-      <p>Connections page content</p>
+      <NavigationBar />
+      <GameTitleBar />
       <ConnectionsGrid {...gridComponents} />
       <ConnectionsButtonBar {...buttonBarComponents} />
     </div>
