@@ -10,6 +10,7 @@ import { currentGameDetails } from './types';
 import NavigationBar from './NavigationBar';
 import GameTitleBar from './GameTitleBar';
 import InfoBar from './InfoBar';
+import TriesRemaining from './tries-remaining';
 
 export default function Connections() {
   const [detailsForGame, setDetailsForGame] = useState({
@@ -22,6 +23,8 @@ export default function Connections() {
       triesRemaining: 4,
       correctGroups: [],
       guessedGroups: [],
+      isGameOver: false,
+      isGameWon: false,
     });
 
   const songs = extractNShuffleSongs(detailsForGame.songsObject);
@@ -32,6 +35,27 @@ export default function Connections() {
       songsForGrid: shuffleSongs(songs),
     }));
   }, []);
+
+  useEffect(() => {
+    if (
+      currentGameDetails.triesRemaining === 0 &&
+      currentGameDetails.correctGroups.length < 4
+    ) {
+      setCurrentGameDetails((prev: currentGameDetails) => ({
+        ...prev,
+        isGameOver: true,
+        isGameWon: false,
+      }));
+    }
+
+    if (currentGameDetails.correctGroups.length === 4) {
+      setCurrentGameDetails((prev: currentGameDetails) => ({
+        ...prev,
+        isGameOver: true,
+        isGameWon: true,
+      }));
+    }
+  }, [currentGameDetails.triesRemaining, currentGameDetails.correctGroups]);
 
   function checkGuessCorrect() {
     const sortedSelected = currentGameDetails.selected.sort();
@@ -44,6 +68,8 @@ export default function Connections() {
       sortedGamedSongs
     );
 
+    console.log(isGuessCorrect);
+
     if (isGuessCorrect) {
       setCurrentGameDetails((prev: currentGameDetails) => {
         const updatedSongsForGrid = prev.songsForGrid.filter(
@@ -55,8 +81,16 @@ export default function Connections() {
           correctGroups: [...prev.correctGroups, sortedSelected],
           selected: [],
           songsForGrid: updatedSongsForGrid,
+          triesRemaining: prev.triesRemaining - 1,
         };
       });
+    } else {
+      setCurrentGameDetails((prev: currentGameDetails) => ({
+        ...prev,
+        selected: [],
+        guessedGroups: [...prev.correctGroups, sortedSelected],
+        triesRemaining: prev.triesRemaining - 1,
+      }));
     }
   }
 
@@ -77,7 +111,11 @@ export default function Connections() {
       <NavigationBar />
       <GameTitleBar />
       <InfoBar />
+      {currentGameDetails.isGameOver && (
+        <p>{currentGameDetails.isGameWon ? 'You won!' : 'You lost!'}</p>
+      )}
       <ConnectionsGrid {...gridComponents} />
+      <TriesRemaining triesRemaining={currentGameDetails.triesRemaining} />
       <ConnectionsButtonBar {...buttonBarComponents} />
     </div>
   );

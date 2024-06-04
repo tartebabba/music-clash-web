@@ -16,5 +16,7 @@ export interface currentGameDetails {
   triesRemaining: number;
   correctGroups: string[][];
   guessedGroups: string[][];
+  isGameOver: boolean;
+  isGameWon: boolean;
 }
 
