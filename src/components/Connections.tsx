@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { currentGameDetails } from './types';
 import NavigationBar from './NavigationBar';
 import GameTitleBar from './GameTitleBar';
+import InfoBar from './InfoBar';
 
 export default function Connections() {
   const [detailsForGame, setDetailsForGame] = useState({
@@ -75,6 +76,7 @@ export default function Connections() {
     <div>
       <NavigationBar />
       <GameTitleBar />
+      <InfoBar />
       <ConnectionsGrid {...gridComponents} />
       <ConnectionsButtonBar {...buttonBarComponents} />
     </div>

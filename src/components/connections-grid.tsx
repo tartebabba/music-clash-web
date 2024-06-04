@@ -51,7 +51,7 @@ export default function ConnectionsGrid(props: ConnectionsGridProps) {
 
   return (
     <>
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center my-4">
         <div className="grid grid-cols-4 gap-2">
           {currentGameDetails.correctGroups.flat().map((song) => {
             return (
