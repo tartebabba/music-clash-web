@@ -26,6 +26,13 @@ export default function Connections() {
       isGameOver: false,
       isGameWon: false,
     });
+  const [showFeedback, setShowFeedback] = useState<{
+    show: null | boolean;
+    isGuessCorrect: null | boolean;
+  }>({
+    show: null,
+    isGuessCorrect: null,
+  });
 
   const songs = extractNShuffleSongs(detailsForGame.songsObject);
 
@@ -35,6 +42,15 @@ export default function Connections() {
       songsForGrid: shuffleSongs(songs),
     }));
   }, []);
+
+  useEffect(() => {
+    if (showFeedback.isGuessCorrect !== null) {
+      const timer = setTimeout(() => {
+        setShowFeedback({ show: null, isGuessCorrect: null });
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [showFeedback.isGuessCorrect]);
 
   useEffect(() => {
     if (
@@ -84,6 +100,7 @@ export default function Connections() {
           triesRemaining: prev.triesRemaining - 1,
         };
       });
+      setShowFeedback({ show: true, isGuessCorrect: true });
     } else {
       setCurrentGameDetails((prev: currentGameDetails) => ({
         ...prev,
@@ -91,6 +108,7 @@ export default function Connections() {
         guessedGroups: [...prev.correctGroups, sortedSelected],
         triesRemaining: prev.triesRemaining - 1,
       }));
+      setShowFeedback({ show: true, isGuessCorrect: false });
     }
   }
 
@@ -111,6 +129,17 @@ export default function Connections() {
       <NavigationBar />
       <GameTitleBar />
       <InfoBar />
+
+      <div className="flex items-center justify-center">
+        {showFeedback.show && currentGameDetails.triesRemaining !== 0 && (
+          <div className=" w-24 bg-black rounded-md flex  justify-center items-center mt-4 p-1">
+            <p className="text-white">
+              {showFeedback.isGuessCorrect ? 'Nice!' : 'Try again!'}
+            </p>
+          </div>
+        )}
+      </div>
+
       {currentGameDetails.isGameOver && (
         <p>{currentGameDetails.isGameWon ? 'You won!' : 'You lost!'}</p>
       )}
