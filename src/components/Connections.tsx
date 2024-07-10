@@ -126,13 +126,12 @@ export default function Connections() {
 
   return (
     <div>
-      <NavigationBar />
       <GameTitleBar />
       <InfoBar />
 
       <div className="flex items-center justify-center">
         {showFeedback.show && currentGameDetails.triesRemaining !== 0 && (
-          <div className=" w-24 bg-black rounded-md flex  justify-center items-center mt-4 p-1">
+          <div className="mt-4 flex w-24 items-center justify-center rounded-md bg-black p-1">
             <p className="text-white">
               {showFeedback.isGuessCorrect ? 'Nice!' : 'Try again!'}
             </p>
