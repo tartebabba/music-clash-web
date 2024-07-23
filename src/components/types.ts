@@ -20,3 +20,9 @@ export interface currentGameDetails {
   isGameWon: boolean;
 }
 
+export type GameCardProps = {
+  id: number;
+  name: string;
+  link: string;
+  description: string;
+};
