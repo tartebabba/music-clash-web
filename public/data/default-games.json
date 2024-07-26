@@ -1,40 +1,20 @@
 {
   "defaultArtists": [
     {
-      "artists": "Artist 1",
-      "songs": [
-        "Artist 1 - Song 1",
-        "Artist 1 - Song 2",
-        "Artist 1 - Song 3",
-        "Artist 1 - Song 4"
-      ]
+      "artists": "Ed Sheeran",
+      "songs": ["Shape of You", "Perfect", "Bad Habits", "Eyes Closed"]
     },
     {
-      "artists": "Artist 2",
-      "songs": [
-        "Artist 2 - Song 1",
-        "Artist 2 - Song 2",
-        "Artist 2 - Song 3",
-        "Artist 2 - Song 4"
-      ]
+      "artists": "Dua Lipa",
+      "songs": ["Levitating", "Don't Start Now", "New Rules", "Dance The Night"]
     },
     {
-      "artists": "Artist 3",
-      "songs": [
-        "Artist 3 - Song 1",
-        "Artist 3 - Song 2",
-        "Artist 3 - Song 3",
-        "Artist 3 - Song 4"
-      ]
+      "artists": "Harry Styles",
+      "songs": ["As It Was", "Watermelon Sugar", "Adore You", "Late Night Talking"]
     },
     {
-      "artists": "Artist 4",
-      "songs": [
-        "Artist 4 - Song 1",
-        "Artist 4 - Song 2",
-        "Artist 4 - Song 3",
-        "Artist 4 - Song 4"
-      ]
+      "artists": "Adele",
+      "songs": ["Someone Like You", "Hello", "Easy On Me", "Rolling in the Deep"]
     }
   ]
 }
