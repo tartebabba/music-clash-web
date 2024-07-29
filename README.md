@@ -22,8 +22,8 @@ To get started with the project, follow these steps:
 1. **Clone the repository:**
 
 ```bash
-git clone https://github.com/yourusername/games-connections.git
-cd games-connections
+git clone https://github.com/yourusername/music-clash-web.git
+cd music-clash-web
 ```
 
 2. **Install dependencies:**
@@ -34,9 +34,7 @@ npm install
 
 ## Usage
 
-To start the development server, run:
-
 ```bash
-npm start
+npm run dev
 This will launch the application on http://localhost:5173.
 ```
