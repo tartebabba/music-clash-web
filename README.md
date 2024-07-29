@@ -1,30 +1,42 @@
-# React + TypeScript + Vite
+# Connections a Music Clash Game
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Inspired by the popular game by the New York Times, Connections, built with React.
 
-Currently, two official plugins are available:
+## What is it?
+This is a puzzle game where a players aim to connect songs to their specific artist. Each game has 16 songs, with 4 songs from 4 different artists. 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Current features
+- Demo base game.
+- Responsive web design.
+- Remaining tries/lives.
 
-## Expanding the ESLint configuration
+## Planned features
+- Connection to Spotify to grab your own personal liked songs.
+- Expansion of default games incase you don't want to connect your spotify.
+- Streaks - keep your streak going.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Installation
 
-- Configure the top-level `parserOptions` property like this:
+To get started with the project, follow these steps:
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+1. **Clone the repository:**
+
+```bash
+git clone https://github.com/yourusername/games-connections.git
+cd games-connections
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+2. **Install dependencies:**
+
+```bash
+npm install
+```
+
+## Usage
+
+To start the development server, run:
+
+```bash
+npm start
+This will launch the application on http://localhost:5173.
+```
