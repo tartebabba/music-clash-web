@@ -18,7 +18,7 @@ export default function Connections() {
   });
 
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState('');
 
   const [currentGameDetails, setCurrentGameDetails] =
     useState<currentGameDetails>({
@@ -41,7 +41,7 @@ export default function Connections() {
   useEffect(() => {
     const loadGameData = async () => {
       setLoading(true);
-      setError(null);
+      setError('');
       try {
         const data = await fetchDefaultGameData();
         console.log(data.defaultArtists);
