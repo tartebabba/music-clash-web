@@ -2,6 +2,13 @@
 
 Inspired by the popular game by the New York Times, Connections, built with React.
 
+### Homepage
+![Music Clash Homepage](/public/music-clash-homepage.png)
+
+### Music Connections
+![Music Connections Game](/public/music-connections-game.png)
+
+
 ## What is it?
 This is a puzzle game where a players aim to connect songs to their specific artist. Each game has 16 songs, with 4 songs from 4 different artists. 
 
